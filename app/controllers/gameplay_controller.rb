@@ -3,6 +3,7 @@ class GameplayController < ApplicationController
   def play
   	@gameplay = Gameplay.new(board: board_params)
   	if @gameplay.valid_board?
+  		@gameplay.play
   		render json: { response: @gameplay.board }, status: :ok
   	end
   	if !@gameplay.valid_board?

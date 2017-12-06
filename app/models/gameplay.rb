@@ -1,5 +1,5 @@
 class Gameplay
-  include ActiveModel::Model
+include ActiveModel::Model
 
   attr_accessor :board
 
@@ -7,7 +7,44 @@ class Gameplay
 		valid_length? && valid_chars? && valid_difference? && !board_full? && !winner?
 	end
 
+	def play
+		move
+		board[move] = "o"
+	end
+
+	def move
+		#win
+		#block
+		#update the below if statements to account for open corners and center. Iterate through available_moves array (compact! to remove nil)
+		#For each available move, check to see if it is a corner first (if so assign move), and then if center is available
+		if available_moves.include?(0)
+			move = 0
+		elsif available_moves.include?(4)
+			move = 4
+		else
+			move = board.index(" ") #Catch all due to time constraints
+		end
+	end
+
 	private
+
+	def available_moves
+		board_array = board.split(//)
+		available_moves = board_array.each_with_index.map { |value, index| index if (value == " ") }
+	end
+
+	#Check each win case. Ideas: Collect index of o values and intersect with win case constant.
+	# def win
+	# 	available_moves.each do |move|
+	# 		if move == 0
+	# 			if ( (board[1] == 'o' && board[2] == 'o') ) #|| (board[4] == 'o' && board[8] == 'o') || (board[3] == 'o' && board[6] == 'o') )
+	# 				win = move
+	# 			end
+	# 		#Check all win combinations
+	# 		end
+	# 	end
+	# 	win
+	# end
 
 	def valid_length?
 		return true if board.length == 9
