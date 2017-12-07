@@ -55,7 +55,7 @@ include ActiveModel::Model
 	end
 
 	def valid_difference?
-		return true if ((num_x == num_o) || ((num_x + 1) == num_o) || ((num_o + 1) == num_x))
+		return true if ((num_x == num_o) || ((num_o + 1) == num_x))
 	end
 
 	def board_full?

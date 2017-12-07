@@ -5,8 +5,7 @@ class GameplayController < ApplicationController
   	if @gameplay.valid_board?
   		@gameplay.play
   		render json: { response: @gameplay.board }, status: :ok
-  	end
-  	if !@gameplay.valid_board?
+  	else
   		render json: { error: "Bad Board" }, status: :bad_request
   	end
   end
