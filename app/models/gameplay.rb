@@ -37,13 +37,15 @@ include ActiveModel::Model
 
   #Check each win case. Ideas: Collect index of o values and intersect with win case constant.
   def win
-    available_moves.each do |move|
-    	temp_board = board[move] = "o"
-    	if winner?(temp_board)
-    		win = move
+  	byebug
+    available_moves.compact!.each do |possible_move|
+    	board_array = board.split(//)
+    	board_array[possible_move] = "o"
+    	if winner?(board_array)
+    		possible_move
+    		return
     	end
     end
-    win
   end
 
   def valid_length?
