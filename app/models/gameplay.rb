@@ -4,7 +4,7 @@ include ActiveModel::Model
   attr_accessor :board
 
   def valid_board?
-    valid_length? && valid_chars? && valid_difference? && !board_full? && !winner?
+    valid_length? && valid_chars? && valid_difference? && !board_full? && !winner?(board)
   end
 
   def play
@@ -62,7 +62,7 @@ include ActiveModel::Model
     return true if (num_x + num_o == 9)
   end
 
-  def winner?(temp_board)
+  def winner?(board)
     return true if (board[0] == "x" && board[1] == "x" && board[2] == "x")
     return true if (board[3] == "x" && board[4] == "x" && board[5] == "x")
     return true if (board[6] == "x" && board[7] == "x" && board[8] == "x")
