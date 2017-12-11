@@ -37,7 +37,6 @@ include ActiveModel::Model
 
   #Check each win case. Ideas: Collect index of o values and intersect with win case constant.
   def win
-  	byebug
     available_moves.compact!.each do |possible_move|
     	board_array = board.split(//)
     	board_array[possible_move] = "o"
