@@ -13,10 +13,12 @@ include ActiveModel::Model
   end
 
   def move
-    #win
+    win
     #block
     #update the below if statements to account for open corners and center. Iterate through available_moves array (compact! to remove nil)
     #For each available move, check to see if it is a corner first (if so assign move), and then if center is available
+
+
     if available_moves.include?(0)
       move = 0
     elsif available_moves.include?(4)
@@ -34,17 +36,15 @@ include ActiveModel::Model
   end
 
   #Check each win case. Ideas: Collect index of o values and intersect with win case constant.
-  # def win
-  #   available_moves.each do |move|
-  #     if move == 0
-  #       if ( (board[1] == 'o' && board[2] == 'o') ) #|| (board[4] == 'o' && board[8] == 'o') || (board[3] == 'o' && board[6] == 'o') )
-  #         win = move
-  #       end
-  #     #Check all win combinations
-  #     end
-  #   end
-  #   win
-  # end
+  def win
+    available_moves.each do |move|
+    	temp_board = board[move] = "o"
+    	if winner?(temp_board)
+    		win = move
+    	end
+    end
+    win
+  end
 
   def valid_length?
     return true if board.length == 9
@@ -62,7 +62,7 @@ include ActiveModel::Model
     return true if (num_x + num_o == 9)
   end
 
-  def winner?
+  def winner?(temp_board)
     return true if (board[0] == "x" && board[1] == "x" && board[2] == "x")
     return true if (board[3] == "x" && board[4] == "x" && board[5] == "x")
     return true if (board[6] == "x" && board[7] == "x" && board[8] == "x")
